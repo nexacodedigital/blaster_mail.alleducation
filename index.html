@@ -1,0 +1,1124 @@
+<!-- 
+  =============================================================
+  E-EMAIL BY ALL EDUCATION INDONESIA (FRONTEND)
+  =============================================================
+-->
+<div id="blogger-thumbnail" style="display:none;">
+    <img src="https://images.unsplash.com/photo-1596495578065-6e0763fa1178?q=80&w=800&auto=format&fit=crop" alt="Thumbnail Aplikasi Payroll">
+</div>
+
+<style>
+    body, html { margin: 0 !important; padding: 0 !important; width: 100vw !important; height: 100vh !important; overflow: hidden !important; background-color: #f4f7fe !important; }
+    #navbar-iframe, .Navbar, .widget, .Header, .Footer, .sidebar, .comments { display: none !important; }
+    #app-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999999; background-color: #f4f7fe; font-family: 'Inter', sans-serif; display: flex; flex-direction: column; }
+    .loader { border-top-color: #ffffff; -webkit-animation: spinner 1.5s linear infinite; animation: spinner 1.5s linear infinite; }
+    @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    
+    .terminal-scroll::-webkit-scrollbar { width: 6px; }
+    .terminal-scroll::-webkit-scrollbar-track { background: #1f2937; }
+    .terminal-scroll::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 3px; }
+    .custom-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+    .custom-scroll::-webkit-scrollbar-track { background: #f4f7fe; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    
+    /* CSS WYSIWYG Editor Profesional */
+    .editor-box { min-height: 150px; cursor: text; white-space: pre-wrap; word-wrap: break-word; color: #000000; font-family: Arial, Helvetica, sans-serif; font-size: 14px;}
+    .editor-box ul { list-style-type: disc; padding-left: 20px; margin-top: 5px; margin-bottom: 5px;}
+    .editor-box ol { list-style-type: decimal; padding-left: 20px; margin-top: 5px; margin-bottom: 5px;}
+    
+    /* PERBAIKAN PARAGRAF DI EDITOR AGAR RAPI (ANTI NUMPUK) */
+    .editor-box p { margin-bottom: 14px; margin-top: 0; line-height: 1.6; }
+    .editor-box div { margin-bottom: 14px; margin-top: 0; line-height: 1.6; }
+    
+    /* Tabel WYSIWYG */
+    .editor-box table { border-collapse: collapse; margin: 10px 0; }
+    .editor-box th, .editor-box td { border: 1px solid #cccccc; padding: 10px; color: #000000; }
+    .table-selected { border: 2px solid #007BFF !important; outline: 2px solid #007BFF !important;}
+</style>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<div id="app-container">
+    <div id="login-screen" class="relative flex items-center justify-center h-full w-full transition-opacity duration-300 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1920&q=80');">
+        <div class="absolute inset-0 bg-gradient-to-br from-[#0044EB]/85 via-[#007BFF]/80 to-[#00D4FF]/80 backdrop-blur-sm"></div>
+        <div class="bg-white p-8 rounded-[20px] shadow-2xl w-full max-w-md relative z-10 border border-white/40">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm border border-blue-100">
+                    <i class="fas fa-building text-3xl text-[#0044EB]"></i>
+                </div>
+                <h2 class="text-2xl font-extrabold text-gray-800 tracking-tight">E-EMAIL</h2>
+                <p class="text-[#007BFF] font-medium text-sm mt-1">BY ALL EDUCATION INDONESIA</p>
+            </div>
+            <form id="login-form" class="space-y-5">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Username</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"><i class="fas fa-user text-gray-400"></i></div>
+                        <input type="text" id="username" class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#007BFF] outline-none transition" placeholder="Masukkan username" required>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"><i class="fas fa-lock text-gray-400"></i></div>
+                        <input type="password" id="password" class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#007BFF] outline-none transition" placeholder="Masukkan password" required>
+                    </div>
+                </div>
+                <button type="submit" id="btn-login" class="w-full bg-gradient-to-r from-[#0044EB] to-[#007BFF] hover:shadow-lg text-white font-semibold py-3.5 rounded-xl transition flex justify-center items-center shadow-blue-500/40">
+                    <span>Masuk Sistem</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="main-screen" class="hidden flex h-full w-full bg-[#f4f7fe]">
+        
+        <!-- SIDEBAR -->
+        <div class="w-64 bg-gradient-to-b from-[#FFA726] to-[#FB8C00] text-white flex flex-col shadow-xl z-20 relative shrink-0">
+            <div class="p-6 border-b border-white/20 flex items-center space-x-3">
+                <div class="bg-white/20 backdrop-blur-md p-2.5 rounded-xl shadow-inner"><i class="fas fa-paper-plane text-white"></i></div>
+                <div><h1 class="font-bold text-lg leading-tight tracking-wide">E-EMAIL</h1><span class="text-[10px] text-orange-100 uppercase tracking-widest font-medium">All Education</span></div>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto py-6 px-3 custom-scroll">
+                <nav class="space-y-1.5">
+                    <a href="#" onclick="navTo('dashboard')" id="nav-dashboard" class="nav-item flex items-center px-4 py-3 bg-white text-[#FB8C00] rounded-xl shadow-md transition-all font-bold"><i class="fas fa-chart-pie w-6"></i><span class="text-sm">Dashboard</span></a>
+                    <a href="#" onclick="navTo('input')" id="nav-input" class="nav-item flex items-center px-4 py-3 text-white opacity-90 hover:bg-white/20 hover:opacity-100 rounded-xl transition-all font-medium"><i class="fas fa-address-book w-6"></i><span class="text-sm">Master Kontak</span></a>
+                    <a href="#" onclick="navTo('template')" id="nav-template" class="nav-item flex items-center px-4 py-3 text-white opacity-90 hover:bg-white/20 hover:opacity-100 rounded-xl transition-all font-medium"><i class="fas fa-clipboard-list w-6"></i><span class="text-sm">Template Pesan</span></a>
+                    <a href="#" onclick="navTo('broadcast')" id="nav-broadcast" class="nav-item flex items-center px-4 py-3 text-white opacity-90 hover:bg-white/20 hover:opacity-100 rounded-xl transition-all font-medium"><i class="fas fa-rocket w-6"></i><span class="text-sm">Kirim Broadcast</span></a>
+                    <a href="#" onclick="navTo('schedule')" id="nav-schedule" class="nav-item flex items-center px-4 py-3 text-white opacity-90 hover:bg-white/20 hover:opacity-100 rounded-xl transition-all font-medium"><i class="far fa-calendar-alt w-6"></i><span class="text-sm">Jadwal Broadcast</span></a>
+                    
+                    <!-- MENU PAYROLL SLIP -->
+                    <a href="#" onclick="navTo('payrollslip')" id="nav-payrollslip" class="nav-item flex items-center px-4 py-3 text-white opacity-90 hover:bg-white/20 hover:opacity-100 rounded-xl transition-all font-medium border border-white/30 bg-blue-900/20"><i class="fas fa-file-invoice-dollar w-6"></i><span class="text-sm">Kirim Slip Gaji</span></a>
+                    
+                    <div class="h-px bg-white/20 my-2 mx-2"></div>
+                    <a href="#" onclick="navTo('settings')" id="nav-settings" class="nav-item flex items-center px-4 py-3 text-white opacity-90 hover:bg-white/20 hover:opacity-100 rounded-xl transition-all font-medium"><i class="fas fa-palette w-6"></i><span class="text-sm">Template Tampilan</span></a>
+                    <a href="#" onclick="navTo('history')" id="nav-history" class="nav-item flex items-center px-4 py-3 text-white opacity-90 hover:bg-white/20 hover:opacity-100 rounded-xl transition-all font-medium"><i class="fas fa-history w-6"></i><span class="text-sm">Riwayat Email</span></a>
+                </nav>
+            </div>
+            
+            <div class="p-5 border-t border-white/20 bg-black/10">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3 text-sm">
+                        <div class="w-9 h-9 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center shadow"><i class="fas fa-user text-white text-xs"></i></div>
+                        <span class="font-medium truncate text-white" id="user-display-name">Admin</span>
+                    </div>
+                    <button onclick="doLogout()" class="text-white opacity-90 hover:text-red-100 transition bg-white/10 hover:bg-red-500/30 p-2 rounded-lg" title="Logout"><i class="fas fa-power-off"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- AREA KONTEN UTAMA -->
+        <div class="flex-1 flex flex-col h-full overflow-hidden relative">
+            <header class="bg-white px-8 py-5 flex justify-between items-center z-10 shadow-[0_2px_10px_-3px_rgba(0,68,235,0.1)] shrink-0">
+                <h2 id="page-title" class="text-[22px] font-extrabold text-[#0044EB]">Dashboard Statistik</h2>
+                <div id="status-koneksi" class="px-4 py-1.5 bg-green-50 border border-green-200 text-green-700 text-xs font-bold rounded-full flex items-center gap-2"><div class="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-sm"></div> Server Online</div>
+            </header>
+
+            <main class="flex-1 min-h-0 overflow-x-hidden overflow-y-auto custom-scroll p-8 pb-32 bg-[#f4f7fe] relative z-0">
+                <!-- VIEW: DASHBOARD -->
+                <div id="view-dashboard" class="view-section space-y-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-white p-6 rounded-[20px] shadow-sm flex items-center space-x-5 transition border border-gray-100">
+                            <div class="w-14 h-14 bg-blue-50 text-[#007BFF] rounded-full flex items-center justify-center text-2xl"><i class="fas fa-users"></i></div>
+                            <div><p class="text-sm text-gray-500 font-medium">Total Kontak</p><h3 class="text-3xl font-bold text-[#0044EB]" id="stat-karyawan">0</h3></div>
+                        </div>
+                        <div class="bg-white p-6 rounded-[20px] shadow-sm flex items-center space-x-5 transition border border-gray-100">
+                            <div class="w-14 h-14 bg-green-50 text-green-500 rounded-full flex items-center justify-center text-2xl"><i class="fas fa-check-circle"></i></div>
+                            <div><p class="text-sm text-gray-500 font-medium">Email Sukses</p><h3 class="text-3xl font-bold text-[#0044EB]" id="stat-sukses">0</h3></div>
+                        </div>
+                        <div class="bg-white p-6 rounded-[20px] shadow-sm flex items-center space-x-5 transition border border-gray-100">
+                            <div class="w-14 h-14 bg-red-50 text-red-500 rounded-full flex items-center justify-center text-2xl"><i class="fas fa-times-circle"></i></div>
+                            <div><p class="text-sm text-gray-500 font-medium">Email Gagal</p><h3 class="text-3xl font-bold text-[#0044EB]" id="stat-gagal">0</h3></div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-[20px] shadow-sm relative overflow-hidden border border-gray-100">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[#0044EB]/5 to-[#00D4FF]/10 rounded-full -mr-20 -mt-20 opacity-80 pointer-events-none"></div>
+                        <h3 class="font-bold text-[#0044EB] mb-4 pb-3 flex items-center gap-2 text-lg relative z-10 border-b border-gray-100"><i class="fas fa-info-circle text-[#00D4FF]"></i> Informasi & Petunjuk Sistem</h3>
+                        
+                        <div class="relative z-10 text-gray-600 text-sm leading-relaxed space-y-4">
+                            <p>Selamat datang di <strong>E-EMAIL by All Education Indonesia</strong>. Ini adalah sistem pengiriman email massal berkecepatan tinggi dengan antrean paralel.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                                <div class="bg-white border border-blue-100 p-5 rounded-xl shadow-sm hover:border-[#007BFF] transition">
+                                    <h4 class="font-bold text-[#0044EB] mb-2"><i class="fas fa-address-book text-[#007BFF] mr-1"></i> 1. Kelola Master Kontak</h4>
+                                    <p class="text-xs text-gray-500">Masukkan data karyawan atau penerima di menu Master Kontak. Bisa Manual / Import Excel.</p>
+                                </div>
+                                <div class="bg-white border border-indigo-100 p-5 rounded-xl shadow-sm hover:border-indigo-400 transition">
+                                    <h4 class="font-bold text-[#0044EB] mb-2"><i class="fas fa-clipboard-list text-indigo-500 mr-1"></i> 2. Siapkan Template Pesan</h4>
+                                    <p class="text-xs text-gray-500">Buat format pesan standar (seperti Payslip atau Info Umum) di menu <strong>Template Pesan</strong>.</p>
+                                </div>
+                                <div class="bg-white border border-green-100 p-5 rounded-xl shadow-sm hover:border-green-400 transition">
+                                    <h4 class="font-bold text-[#0044EB] mb-2"><i class="fas fa-rocket text-green-500 mr-1"></i> 3. Eksekusi Broadcast</h4>
+                                    <p class="text-xs text-gray-500">Centang penerima, masukkan link lampiran (opsional), atur pengiriman langsung / terjadwal, lalu Kirim!</p>
+                                </div>
+                                <div class="bg-white border border-yellow-100 p-5 rounded-xl shadow-sm hover:border-yellow-400 transition">
+                                    <h4 class="font-bold text-[#0044EB] mb-2"><i class="fas fa-file-invoice-dollar text-yellow-500 mr-1"></i> 4. Fitur Slip Gaji</h4>
+                                    <p class="text-xs text-gray-500">Gunakan menu <strong>Kirim Slip Gaji</strong> untuk merakit template tabel HTML Slip Gaji otomatis dari data Excel!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW: TEMPLATE PESAN -->
+                <div id="view-template" class="view-section hidden max-w-4xl space-y-6">
+                    <div class="bg-white p-8 rounded-[20px] shadow-sm border border-gray-100">
+                        <div class="flex items-center justify-between mb-5 border-b border-gray-100 pb-3">
+                            <h3 class="font-bold text-[#0044EB] text-lg" id="form-template-title">Buat Template Baru</h3>
+                            <button onclick="resetTemplateForm()" type="button" class="text-xs bg-gray-50 text-gray-600 hover:bg-gray-100 border border-gray-200 px-4 py-2 rounded-lg font-medium transition">
+                                <i class="fas fa-plus mr-1"></i> Buat Baru
+                            </button>
+                        </div>
+                        
+                        <form id="form-template" class="space-y-5">
+                            <input type="hidden" id="tmpl-id" value="">
+                            <div>
+                                <label class="block text-sm font-medium text-[#0044EB] mb-1.5">Nama Template</label>
+                                <input type="text" id="tmpl-name" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#007BFF] outline-none text-sm bg-gray-50/50 focus:bg-white transition" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#0044EB] mb-1.5">Subjek Email Default <span class="text-gray-400 font-normal text-xs">(Support Emoticon 🔥🚀)</span></label>
+                                <input type="text" id="tmpl-subject" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#007BFF] outline-none text-sm bg-gray-50/50 focus:bg-white transition" required>
+                            </div>
+                            
+                            <!-- EDITOR WYSIWYG -->
+                            <div>
+                                <div class="flex justify-between items-end mb-1.5">
+                                    <label class="block text-sm font-medium text-[#0044EB]">Isi Pesan HTML/Teks <span class="text-[#007BFF] font-normal ml-1 text-xs">(Gunakan {{Nama}} & {{Periode}})</span></label>
+                                    <div class="flex gap-1 bg-gray-50 p-1.5 rounded-lg border border-gray-200 flex-wrap items-center">
+                                        <button type="button" onclick="formatDoc('bold', 'tmpl-body')" class="bg-white border border-gray-200 hover:bg-blue-50 text-gray-600 px-2.5 py-1.5 rounded text-xs shadow-sm font-bold" title="Tebal (Ctrl+B)"><i class="fas fa-bold"></i></button>
+                                        <button type="button" onclick="formatDoc('italic', 'tmpl-body')" class="bg-white border border-gray-200 hover:bg-blue-50 text-gray-600 px-2.5 py-1.5 rounded text-xs shadow-sm italic" title="Miring (Ctrl+I)"><i class="fas fa-italic"></i></button>
+                                        
+                                        <input type="color" onchange="document.execCommand('foreColor', false, this.value)" class="w-7 h-7 border border-gray-200 rounded ml-1 shadow-sm cursor-pointer" title="Warna Teks">
+                                        
+                                        <div class="w-px h-6 bg-gray-300 mx-1"></div>
+                                        
+                                        <button type="button" onclick="formatDoc('insertUnorderedList', 'tmpl-body')" class="bg-white border border-gray-200 hover:bg-blue-50 text-gray-600 px-2.5 py-1.5 rounded text-xs shadow-sm" title="Poin"><i class="fas fa-list-ul"></i></button>
+                                        <button type="button" onclick="formatDoc('insertOrderedList', 'tmpl-body')" class="bg-white border border-gray-200 hover:bg-blue-50 text-gray-600 px-2.5 py-1.5 rounded text-xs shadow-sm" title="Nomor"><i class="fas fa-list-ol"></i></button>
+                                        
+                                        <div class="w-px h-6 bg-gray-300 mx-1"></div>
+                                        
+                                        <button type="button" onclick="insertLink('tmpl-body')" class="bg-white border border-gray-200 hover:bg-blue-50 text-gray-600 px-2.5 py-1.5 rounded text-xs shadow-sm" title="Sisipkan Link Teks"><i class="fas fa-link"></i> Link</button>
+                                        
+                                        <div class="w-px h-6 bg-gray-300 mx-1"></div>
+                                        
+                                        <div class="flex items-center gap-1 bg-white border border-gray-200 rounded px-1 shadow-sm">
+                                            <button type="button" onclick="insertTable('tmpl-body')" class="hover:bg-blue-50 text-gray-600 px-2 py-1.5 rounded text-xs" title="Buat Tabel Baru"><i class="fas fa-table"></i></button>
+                                            <button type="button" onclick="modifyTable('tmpl-body', 'addRow')" class="hover:bg-blue-50 text-green-600 px-2 py-1.5 rounded text-xs" title="Tambah Baris (Bawah)"><i class="fas fa-arrow-down"></i></button>
+                                            <button type="button" onclick="modifyTable('tmpl-body', 'addColumn')" class="hover:bg-blue-50 text-blue-600 px-2 py-1.5 rounded text-xs" title="Tambah Kolom (Samping)"><i class="fas fa-arrow-right"></i></button>
+                                            <button type="button" onclick="modifyTable('tmpl-body', 'deleteTable')" class="hover:bg-red-50 text-red-500 px-2 py-1.5 rounded text-xs" title="Hapus Tabel"><i class="fas fa-trash"></i></button>
+                                            
+                                            <!-- Fitur Baru: Pengaturan Tabel -->
+                                            <select onchange="modifyTable('tmpl-body', 'setWidth', this.value); this.value='';" class="text-[10px] outline-none border-l border-gray-200 ml-1 pl-1 cursor-pointer">
+                                                <option value="">Lebar</option>
+                                                <option value="100%">100%</option>
+                                                <option value="75%">75%</option>
+                                                <option value="50%">50%</option>
+                                                <option value="auto">Auto</option>
+                                            </select>
+                                            <input type="color" onchange="modifyTable('tmpl-body', 'setHeaderColor', this.value)" class="w-5 h-5 border border-gray-200 rounded ml-1 cursor-pointer" title="Warna Background Judul Tabel">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="tmpl-body" contenteditable="true" class="editor-box w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#007BFF] outline-none text-sm leading-relaxed bg-gray-50/50 focus:bg-white transition shadow-inner"></div>
+                            </div>
+                            <div class="text-right pt-2">
+                                <button type="submit" id="btn-save-template" class="bg-gradient-to-r from-[#0044EB] to-[#007BFF] hover:shadow-lg text-white px-8 py-3 rounded-xl font-medium transition-all flex items-center justify-center gap-2 w-full md:w-auto md:ml-auto">
+                                    <i class="fas fa-save"></i> Simpan Template
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="bg-white rounded-[20px] shadow-sm overflow-hidden border border-gray-100">
+                        <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/30">
+                            <h3 class="font-bold text-[#0044EB] text-lg">Template Tersimpan</h3>
+                            <button onclick="loadTemplates(true)" class="text-[#007BFF] hover:text-[#0044EB] text-sm font-medium"><i class="fas fa-sync-alt"></i> Refresh</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm text-left text-gray-500">
+                                <thead class="text-xs text-gray-400 uppercase bg-gray-50 border-b border-gray-100">
+                                    <tr><th class="px-6 py-4">Nama Template</th><th class="px-6 py-4">Subjek</th><th class="px-6 py-4 w-32 text-right">Aksi</th></tr>
+                                </thead>
+                                <tbody id="table-template-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW: INPUT DATA -->
+                <div id="view-input" class="view-section hidden max-w-3xl space-y-6">
+                    <div class="bg-white p-8 rounded-[20px] shadow-sm border border-gray-100">
+                        <div class="flex items-center justify-between mb-5 border-b border-gray-100 pb-3">
+                            <h3 class="font-bold text-[#0044EB] text-lg">Tambah Master Kontak (Manual)</h3>
+                        </div>
+                        <form id="form-input-manual" class="space-y-5">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                <div>
+                                    <label class="block text-sm font-medium text-[#0044EB] mb-1.5">Nama Lengkap</label>
+                                    <input type="text" id="input-nama" class="w-full px-4 py-2.5 bg-gray-50/50 focus:bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#007BFF] outline-none text-sm transition" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-[#0044EB] mb-1.5">Email Tujuan</label>
+                                    <input type="email" id="input-email" class="w-full px-4 py-2.5 bg-gray-50/50 focus:bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#007BFF] outline-none text-sm transition" required>
+                                </div>
+                            </div>
+                            <div class="text-right pt-2">
+                                <button type="submit" id="btn-submit-manual" class="bg-gradient-to-r from-[#0044EB] to-[#007BFF] hover:shadow-lg text-white px-8 py-3 rounded-xl font-medium transition flex items-center justify-center gap-2 w-full md:w-auto md:ml-auto">
+                                    <i class="fas fa-user-plus"></i> Simpan Kontak Baru
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-[20px] shadow-sm border border-gray-100">
+                        <div class="flex items-center justify-between mb-5 border-b border-gray-100 pb-3">
+                            <h3 class="font-bold text-[#0044EB] text-lg">Import Massal (Copy-Paste dari Excel)</h3>
+                        </div>
+                        <form id="form-input-massal" class="space-y-5">
+                            <div>
+                                <label class="block text-sm font-medium text-[#0044EB] mb-1.5">Paste Data Excel Di Sini</label>
+                                <textarea id="input-excel" rows="6" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#007BFF] outline-none text-sm font-mono whitespace-pre bg-gray-50/80 shadow-inner transition" placeholder="Nama&#9;Email" required></textarea>
+                            </div>
+                            <div class="pt-2 text-right">
+                                <button type="submit" id="btn-submit-massal" class="bg-gradient-to-r from-[#10b981] to-[#059669] hover:shadow-lg text-white px-8 py-3 rounded-xl font-medium transition flex items-center justify-center gap-2 w-full md:w-auto md:ml-auto">
+                                    <i class="fas fa-file-import"></i> Import Master Data
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- VIEW: BROADCAST REGULER -->
+                <div id="view-broadcast" class="view-section hidden space-y-6">
+                    <div class="flex flex-col md:flex-row justify-between items-center bg-white p-6 rounded-[20px] shadow-sm border border-blue-100 bg-gradient-to-r from-white to-blue-50/20 gap-4">
+                        <div>
+                            <h3 class="font-bold text-[#1b2559] text-lg">Langkah 1: Pilih Penerima</h3>
+                            <p class="text-sm text-gray-500 mt-1">Kirim email masal reguler.</p>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                            <div class="relative w-full md:w-64">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><i class="fas fa-search text-gray-400"></i></div>
+                                <input type="text" id="search-kontak" onkeyup="filterKontak()" class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm transition bg-gray-50 focus:bg-white" placeholder="Cari nama...">
+                            </div>
+                            <button onclick="deleteSelectedKontak()" class="bg-white border border-red-200 text-red-500 hover:bg-red-50 px-4 py-2.5 rounded-xl font-medium transition text-sm shadow-sm"><i class="fas fa-trash-alt"></i> Hapus</button>
+                            <button onclick="loadPayrollData(true)" class="bg-white border border-blue-200 text-[#007BFF] hover:bg-blue-50 px-4 py-2.5 rounded-xl font-medium transition text-sm shadow-sm"><i class="fas fa-sync-alt" id="icon-sync"></i> Refresh</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-[20px] shadow-sm overflow-hidden border border-gray-100">
+                        <div class="overflow-x-auto max-h-[400px] custom-scroll">
+                            <table class="w-full text-sm text-left text-gray-500 relative">
+                                <thead class="text-xs text-gray-400 uppercase bg-gray-50 sticky top-0 z-10 shadow-sm border-b border-gray-100">
+                                    <tr>
+                                        <th class="px-6 py-4 w-10"><input type="checkbox" id="check-all" onclick="toggleAll()" class="w-4 h-4 text-[#007BFF] rounded border-gray-300"></th>
+                                        <th class="px-6 py-4 min-w-[200px]">Nama & Email</th>
+                                        <th class="px-6 py-4 min-w-[300px]">Lampiran File Drive (Opsional)</th>
+                                        <th class="px-6 py-4 w-24 text-center">Status</th>
+                                        <th class="px-4 py-4 w-16 text-center">Aksi</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="table-payroll-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-[20px] shadow-sm space-y-5 border border-gray-100">
+                        <h3 class="font-bold text-[#0044EB] text-lg border-b border-gray-100 pb-3 flex justify-between items-center">
+                            <span>Langkah 2: Konfigurasi Pesan</span>
+                            <div class="flex items-center gap-2 text-sm font-normal">
+                                <label class="text-gray-500"><i class="fas fa-magic text-[#00D4FF]"></i> Pilih Template:</label>
+                                <select id="select-broadcast-template" onchange="applySelectedTemplate()" class="bg-blue-50 border border-blue-200 text-[#0044EB] text-sm rounded-lg outline-none cursor-pointer font-medium px-3 py-2">
+                                    <option value="">-- Ketik Manual --</option>
+                                </select>
+                            </div>
+                        </h3>
+                        
+                        <div class="mb-4">
+                            <label class="block text-sm font-bold text-[#0044EB] mb-1.5"><i class="fas fa-envelope-open-text text-[#007BFF] mr-1"></i> Email Pengirim (Sender Name)</label>
+                            <select id="select-sender" class="w-full md:w-1/2 px-4 py-2.5 border border-gray-200 rounded-xl outline-none text-sm bg-gray-50 cursor-pointer text-gray-700"></select>
+                            <p class="text-xs text-gray-500 mt-1">Jika email ini terdaftar sebagai Alias, sistem akan mengirim atas nama email tersebut.</p>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-medium text-[#0044EB] mb-1.5">Subjek Email</label>
+                                <input type="text" id="email-subject" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-gray-50 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#0044EB] mb-1.5">Periode ({{Periode}})</label>
+                                <input type="text" id="email-periode" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-gray-50 text-sm" placeholder="Maret 2026">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between items-end mb-1.5">
+                                <label class="block text-sm font-medium text-[#0044EB]">Isi Pesan HTML/Teks</label>
+                                <div class="flex gap-1 bg-gray-50 p-1.5 rounded-lg border border-gray-200 flex-wrap items-center">
+                                    <button type="button" onclick="formatDoc('bold', 'email-body')" class="bg-white border border-gray-200 hover:bg-blue-50 text-gray-600 px-2.5 py-1.5 rounded text-xs shadow-sm font-bold"><i class="fas fa-bold"></i></button>
+                                    <button type="button" onclick="formatDoc('italic', 'email-body')" class="bg-white border border-gray-200 hover:bg-blue-50 text-gray-600 px-2.5 py-1.5 rounded text-xs shadow-sm italic"><i class="fas fa-italic"></i></button>
+                                    <input type="color" onchange="document.execCommand('foreColor', false, this.value)" class="w-7 h-7 border border-gray-200 rounded ml-1 shadow-sm cursor-pointer">
+                                    <div class="w-px h-6 bg-gray-300 mx-1"></div>
+                                    <button type="button" onclick="formatDoc('insertUnorderedList', 'email-body')" class="bg-white border border-gray-200 hover:bg-blue-50 text-gray-600 px-2.5 py-1.5 rounded text-xs shadow-sm"><i class="fas fa-list-ul"></i></button>
+                                    <button type="button" onclick="formatDoc('insertOrderedList', 'email-body')" class="bg-white border border-gray-200 hover:bg-blue-50 text-gray-600 px-2.5 py-1.5 rounded text-xs shadow-sm"><i class="fas fa-list-ol"></i></button>
+                                    <div class="w-px h-6 bg-gray-300 mx-1"></div>
+                                    <button type="button" onclick="insertLink('email-body')" class="bg-white border border-gray-200 hover:bg-blue-50 text-gray-600 px-2.5 py-1.5 rounded text-xs shadow-sm"><i class="fas fa-link"></i></button>
+                                    <div class="w-px h-6 bg-gray-300 mx-1"></div>
+                                    <div class="flex items-center gap-1 bg-white border border-gray-200 rounded px-1 shadow-sm">
+                                        <button type="button" onclick="insertTable('email-body')" class="hover:bg-blue-50 text-gray-600 px-2 py-1.5 rounded text-xs"><i class="fas fa-table"></i></button>
+                                        <button type="button" onclick="modifyTable('email-body', 'addRow')" class="hover:bg-blue-50 text-green-600 px-2 py-1.5 rounded text-xs"><i class="fas fa-arrow-down"></i></button>
+                                        <button type="button" onclick="modifyTable('email-body', 'addColumn')" class="hover:bg-blue-50 text-blue-600 px-2 py-1.5 rounded text-xs"><i class="fas fa-arrow-right"></i></button>
+                                        <button type="button" onclick="modifyTable('email-body', 'deleteTable')" class="hover:bg-red-50 text-red-500 px-2 py-1.5 rounded text-xs"><i class="fas fa-trash"></i></button>
+                                        <select onchange="modifyTable('email-body', 'setWidth', this.value); this.value='';" class="text-[10px] outline-none border-l border-gray-200 ml-1 pl-1 cursor-pointer"><option value="">Lebar</option><option value="100%">100%</option><option value="75%">75%</option><option value="50%">50%</option><option value="auto">Auto</option></select>
+                                        <input type="color" onchange="modifyTable('email-body', 'setHeaderColor', this.value)" class="w-5 h-5 border border-gray-200 rounded ml-1 cursor-pointer">
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="email-body" contenteditable="true" class="editor-box w-full px-4 py-3 border border-gray-200 rounded-xl bg-gray-50/50 shadow-inner"></div>
+                        </div>
+                    </div>
+
+                    <!-- FITUR JADWAL -->
+                    <div class="bg-blue-50/50 border border-blue-200 rounded-[20px] p-6 shadow-sm">
+                        <label class="flex items-center gap-3 font-bold text-[#0044EB] cursor-pointer">
+                            <input type="checkbox" id="cb-schedule" onchange="toggleSchedule()" class="w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500">
+                            Kirim Nanti Secara Otomatis (Terjadwal / Rutin)
+                        </label>
+                        <div id="schedule-container" class="hidden grid grid-cols-1 md:grid-cols-2 gap-5 mt-5 pt-5 border-t border-blue-100">
+                            <div>
+                                <label class="block text-sm font-medium text-[#0044EB] mb-1.5"><i class="far fa-calendar-alt mr-1"></i> Tanggal & Waktu Mulai</label>
+                                <input type="datetime-local" id="schedule-time" class="w-full px-4 py-2.5 border border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-[#0044EB] mb-1.5"><i class="fas fa-redo-alt mr-1"></i> Rutinitas Pengiriman</label>
+                                <select id="schedule-routine" class="w-full px-4 py-2.5 border border-blue-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none text-sm bg-white cursor-pointer font-medium text-gray-700">
+                                    <option value="Sekali">Hanya Sekali (Kirim Nanti)</option>
+                                    <option value="Harian">Rutin Setiap Hari</option>
+                                    <option value="Mingguan">Rutin Setiap Minggu</option>
+                                    <option value="Bulanan">Rutin Setiap Bulan</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-[20px] p-8 border border-gray-100 shadow-sm relative overflow-hidden">
+                        <div class="flex justify-between items-center mb-5 relative z-10">
+                            <div>
+                                <h3 class="font-bold text-[#0044EB] text-xl mb-1">Langkah 3: Eksekusi</h3>
+                            </div>
+                            <button onclick="startBroadcast()" id="btn-broadcast" class="bg-gradient-to-r from-[#0044EB] to-[#007BFF] hover:shadow-lg text-white px-8 py-3.5 rounded-xl font-bold flex items-center gap-2">
+                                <i class="fas fa-paper-plane"></i> Kirim Reguler
+                            </button>
+                        </div>
+                        <div class="mt-6 border border-gray-800 rounded-xl bg-[#0b1437] text-[#4ade80] font-mono text-sm p-6 h-56 overflow-y-auto terminal-scroll">
+                            <div id="terminal-content" class="leading-relaxed whitespace-pre-line">> Siap memulai...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============================================================== -->
+                <!-- VIEW BARU: PAYROLL SLIP (HTML DINAMIS EXCEL) -->
+                <!-- ============================================================== -->
+                <div id="view-payrollslip" class="view-section hidden space-y-6">
+                    
+                    <!-- HERO SECTION PAYROLL -->
+                    <div class="bg-gradient-to-r from-blue-900 to-blue-800 p-8 rounded-[20px] shadow-lg text-white relative overflow-hidden">
+                        <div class="absolute top-0 right-0 opacity-10 transform translate-x-10 -translate-y-10"><i class="fas fa-file-invoice-dollar text-[150px]"></i></div>
+                        <h2 class="text-2xl font-bold mb-2">Sistem Slip Gaji (Payroll) Dinamis</h2>
+                        <p class="text-blue-200 text-sm max-w-2xl mb-6 leading-relaxed">Fitur ini memungkinkan Anda mengirim Slip Gaji berupa tabel HTML rapi langsung ke body email (bukan lampiran file) berdasarkan data Excel. Cukup Copy-Paste data Excel Anda ke kolom di bawah ini!</p>
+                        
+                        <div class="bg-white/10 border border-white/20 p-4 rounded-xl inline-block backdrop-blur-sm">
+                            <p class="text-xs font-bold text-yellow-300 mb-2"><i class="fas fa-exclamation-triangle mr-1"></i> ATURAN PENTING FORMAT EXCEL (Wajib Urut & Jangan Diubah Judulnya!):</p>
+                            <p class="text-xs text-gray-200 mb-1">Baris 1 wajib berisi Header persis seperti ini:</p>
+                            <div class="bg-black/30 p-2 rounded text-[10px] font-mono text-green-300 mb-3 overflow-x-auto whitespace-nowrap border border-black/50">
+                                Email | Nama | Jabatan | Grade | Hari Kerja | Absen | Gaji Pokok | Tunj. Jabatan | Tunj. Keahlian | Tunj. Interim | Tunj. Kinerja | Tunj. Gross Up | BPJS Kes (T) | BPJS JHT (T) | BPJS JP (T) | Bonus | THR | Uang Kompensasi | Uang Pisah | Uang Pesangon | Uang Penghargaan | Uang Penggantian | Insentif | BPJS Kes (NT) | BPJS JHT (NT) | BPJS JP (NT) | BPJS JKK (NT) | BPJS JKM (NT) | BPJS JKP (NT) | Iuran BPJS Kes | Iuran BPJS JHT | Iuran BPJS JP | Prorata Absen | Pinjaman | Pajak Insentif
+                            </div>
+                            <button onclick="copyFormatHeader()" class="text-xs bg-white text-blue-900 font-bold px-3 py-1.5 rounded hover:bg-blue-50 transition"><i class="fas fa-copy mr-1"></i> Copy Format Header Excel</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-[20px] shadow-sm border border-gray-100">
+                        <div class="flex items-center justify-between mb-5 border-b border-gray-100 pb-3">
+                            <h3 class="font-bold text-[#0044EB] text-lg"><i class="fas fa-file-import text-green-500 mr-2"></i> Langkah 1: Import Data Gaji Bulan Ini</h3>
+                        </div>
+                        <form id="form-import-payrollslip" class="space-y-5">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1.5">Paste Data Excel (Termasuk Baris Header-nya)</label>
+                                <textarea id="input-excel-payrollslip" rows="8" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#007BFF] outline-none text-xs font-mono whitespace-pre bg-gray-50/80 shadow-inner transition" placeholder="Email   Nama   Jabatan   Grade   ..." required></textarea>
+                            </div>
+                            <div class="flex gap-4">
+                                <input type="text" id="payroll-periode-import" class="w-1/3 px-4 py-3 border border-gray-200 rounded-xl text-sm" placeholder="Periode (Cth: Januari 2026)" required>
+                                <button type="submit" id="btn-import-payrollslip" class="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 hover:shadow-lg text-white font-bold py-3 rounded-xl transition flex items-center justify-center gap-2">
+                                    <i class="fas fa-upload"></i> Proses Data Excel & Masukkan Antrean
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="bg-white p-8 rounded-[20px] shadow-sm relative overflow-hidden border border-gray-100">
+                        <div class="flex justify-between items-center mb-5 relative z-10 border-b border-gray-100 pb-4">
+                            <div>
+                                <h3 class="font-bold text-[#0044EB] text-xl mb-1"><i class="fas fa-paper-plane text-[#007BFF] mr-2"></i> Langkah 2: Kirim Slip Gaji</h3>
+                                <p class="text-sm text-gray-500">Sistem akan menyusun HTML tabel Slip Gaji dan mengirimkannya berdasarkan antrean di bawah.</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="loadAntreanPayrollSlip()" class="bg-white border border-blue-200 text-[#007BFF] px-4 py-2 rounded-xl text-sm font-bold"><i class="fas fa-sync-alt"></i> Cek Antrean</button>
+                                <button onclick="startBroadcastPayrollSlip()" id="btn-send-payrollslip" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-6 py-2 rounded-xl text-sm font-bold shadow-md hover:shadow-lg" disabled><i class="fas fa-bolt mr-1"></i> EKSEKUSI KIRIM SLIP!</button>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 bg-gray-50 rounded-xl border border-gray-200 p-4 mb-4">
+                            <h4 class="text-sm font-bold text-gray-700 mb-2">Pengaturan Khusus Slip Gaji:</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div><label class="text-xs text-gray-500">Subjek Email:</label><input type="text" id="slip-subject" class="w-full px-3 py-2 border rounded mt-1 text-sm font-medium bg-gray-100 text-gray-500" value="PAYSLIP - PERIODE - NAMA" readonly></div>
+                                <div><label class="text-xs text-gray-500">Nama Pengirim (Cek Alias):</label><select id="slip-sender" class="w-full px-3 py-2 border rounded mt-1 text-sm bg-white"></select></div>
+                            </div>
+                        </div>
+
+                        <!-- TERMINAL SLIP -->
+                        <div class="mt-6 border border-gray-800 rounded-xl bg-[#0b1437] text-[#4ade80] font-mono text-sm p-6 h-56 overflow-y-auto terminal-scroll relative">
+                            <div class="absolute top-3 right-4 z-10"><button onclick="document.getElementById('terminal-slip-content').innerHTML = ''" class="text-red-400 text-[11px] bg-white/10 px-3 py-1 rounded">Clear</button></div>
+                            <div id="terminal-slip-content" class="mt-2 leading-relaxed whitespace-pre-line">> Menunggu instruksi pengiriman slip gaji...</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ============================================================== -->
+
+                <!-- VIEW: JADWAL BROADCAST -->
+                <div id="view-schedule" class="view-section hidden">
+                    <div class="bg-white rounded-[20px] shadow-sm overflow-hidden border border-gray-100">
+                        <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/30">
+                            <div>
+                                <h3 class="font-bold text-[#0044EB] text-lg">Daftar Jadwal & Rutinitas Email</h3>
+                                <p class="text-[11px] text-gray-500 mt-1">Sistem robot otomatis mengecek dan mengirim jadwal setiap 5 Menit.</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="forceRunAllSchedules()" class="text-white bg-gradient-to-r from-green-500 to-emerald-500 px-4 py-2 rounded-lg text-sm font-bold transition"><i class="fas fa-play"></i> Eksekusi Tertunda</button>
+                                <button onclick="loadSchedules(true)" class="text-[#007BFF] bg-blue-50/50 border border-blue-100 px-4 py-2 rounded-lg text-sm font-medium"><i class="fas fa-sync-alt"></i> Refresh Data</button>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto custom-scroll max-h-[500px]">
+                            <table class="w-full text-sm text-left text-gray-500 relative">
+                                <thead class="text-xs text-gray-400 uppercase bg-gray-50 sticky top-0 shadow-sm border-b border-gray-100">
+                                    <tr><th class="px-6 py-4">Waktu Mulai</th><th class="px-6 py-4">Rutinitas</th><th class="px-6 py-4">Subjek</th><th class="px-6 py-4">Status</th><th class="px-6 py-4">Log Terakhir</th><th class="px-6 py-4 text-center">Aksi</th></tr>
+                                </thead>
+                                <tbody id="table-schedule-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW: SETTINGS -->
+                <div id="view-settings" class="view-section hidden max-w-4xl space-y-6">
+                    <div class="bg-white p-8 rounded-[20px] shadow-sm border border-gray-100">
+                        <h3 class="font-bold text-[#0044EB] text-lg mb-5 border-b border-gray-100 pb-3">Pengaturan Template Tampilan</h3>
+                        <form id="settings-form" class="space-y-5">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 bg-blue-50/30 p-5 rounded-xl border border-blue-100">
+                                <div>
+                                    <label class="block text-sm font-medium text-[#0044EB] mb-1.5">URL Favicon</label>
+                                    <input type="url" id="set-favicon" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl outline-none text-sm bg-white">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-[#0044EB] mb-1.5">Daftar Email Pengirim (Sender Name / Alias)</label>
+                                    <input type="text" id="set-senders" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl outline-none text-sm bg-white" placeholder="email1@domain.com, email2@domain.com">
+                                    <p class="text-[10px] text-gray-500 mt-1">Sistem akan otomatis menggunakan Alias jika email terdaftar.</p>
+                                </div>
+                            </div>
+                            <div class="space-y-4 pt-2">
+                                <div>
+                                    <label class="block text-sm font-medium text-[#0044EB] mb-1.5">URL Logo Atas (Header Email)</label>
+                                    <input type="url" id="set-logo" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl outline-none text-sm bg-gray-50">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-[#0044EB] mb-1.5">URL Banner Bawah (Footer Email)</label>
+                                    <input type="url" id="set-banner" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl outline-none text-sm bg-gray-50">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-5 pt-2">
+                                <div>
+                                    <label class="block text-sm font-medium text-[#0044EB] mb-1.5">Global CC</label>
+                                    <input type="email" id="set-cc" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl outline-none text-sm bg-gray-50">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-[#0044EB] mb-1.5">Global BCC</label>
+                                    <input type="email" id="set-bcc" class="w-full px-4 py-2.5 border border-gray-200 rounded-xl outline-none text-sm bg-gray-50">
+                                </div>
+                            </div>
+                            <div class="pt-6 border-t border-gray-100 mt-6 text-right">
+                                <button type="button" onclick="saveSettings()" class="bg-gradient-to-r from-[#10b981] to-[#059669] hover:shadow-lg text-white px-8 py-3 rounded-xl font-medium flex items-center justify-center gap-2 w-full md:w-auto md:ml-auto">
+                                    <i class="fas fa-save"></i> Simpan Pengaturan
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- VIEW: HISTORY -->
+                <div id="view-history" class="view-section hidden">
+                    <div class="bg-white rounded-[20px] shadow-sm overflow-hidden border border-gray-100">
+                        <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/30">
+                            <h3 class="font-bold text-[#0044EB] text-lg">Riwayat Pengiriman Terakhir</h3>
+                            <button onclick="loadHistory(true)" class="text-[#007BFF] bg-blue-50/50 border border-blue-100 px-4 py-2 rounded-lg text-sm font-medium"><i class="fas fa-sync-alt mr-1.5"></i> Refresh Data</button>
+                        </div>
+                        <div class="overflow-x-auto custom-scroll max-h-[500px]">
+                            <table class="w-full text-sm text-left text-gray-500 relative">
+                                <thead class="text-xs text-gray-400 uppercase bg-gray-50 sticky top-0 shadow-sm border-b border-gray-100">
+                                    <tr><th class="px-6 py-4">Waktu</th><th class="px-6 py-4">Penerima</th><th class="px-6 py-4">Subjek</th><th class="px-6 py-4">Status</th><th class="px-6 py-4">Pesan</th></tr>
+                                </thead>
+                                <tbody id="table-history-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- MODAL OVERLAY (UNIVERSAL POP-UPS) -->
+    <div id="modal-overlay" class="fixed inset-0 bg-slate-900/40 z-[999999] hidden flex items-center justify-center transition-opacity duration-300 opacity-0 backdrop-blur-sm">
+        <div id="modal-loading" class="bg-white rounded-[20px] shadow-2xl w-[350px] h-[140px] hidden flex flex-col items-center justify-center transform transition-all scale-95 border border-white">
+            <div class="w-12 h-12 border-[4px] border-[#007BFF] border-t-transparent rounded-full animate-spin"></div>
+        </div>
+        <div id="modal-success" class="bg-white rounded-[24px] shadow-2xl p-10 hidden flex-col items-center justify-center transform transition-all scale-95 w-[420px] text-center border border-white">
+            <div class="mx-auto w-[90px] h-[90px] rounded-full border-[3px] border-[#dcfce7] flex items-center justify-center mb-6 bg-green-50/30"><i class="fas fa-check text-[45px] text-[#4ade80]"></i></div>
+            <h3 id="modal-success-title" class="text-[26px] font-bold text-[#1b2559] mb-3">Terkirim!</h3>
+            <p id="modal-success-desc" class="text-gray-500 mb-8 text-[15px] leading-relaxed px-4">Aksi berhasil dilakukan.</p>
+            <button onclick="closeModal()" class="bg-[#7b68ee] hover:bg-[#6855df] hover:shadow-lg text-white font-medium py-3 px-14 rounded-xl transition-all text-[15px]">OK</button>
+        </div>
+        <div id="modal-error" class="bg-white rounded-[24px] shadow-2xl p-10 hidden flex-col items-center justify-center transform transition-all scale-95 w-[420px] text-center border border-white">
+            <div class="mx-auto w-[90px] h-[90px] rounded-full border-[3px] border-red-100 flex items-center justify-center mb-6 bg-red-50/30"><i class="fas fa-times text-[45px] text-red-400"></i></div>
+            <h3 id="modal-error-title" class="text-[26px] font-bold text-[#1b2559] mb-3">Gagal!</h3>
+            <p id="modal-error-desc" class="text-gray-500 mb-8 text-[15px] leading-relaxed px-4">Terdapat kesalahan sistem.</p>
+            <button onclick="closeModal()" class="bg-red-500 hover:bg-red-600 hover:shadow-lg text-white font-medium py-3 px-14 rounded-xl transition-all text-[15px]">Tutup</button>
+        </div>
+        <div id="modal-confirm" class="bg-white rounded-[24px] shadow-2xl p-8 hidden flex-col items-center justify-center transform transition-all scale-95 w-[400px] text-center border border-white">
+            <div class="mx-auto w-[80px] h-[80px] rounded-full border-[3px] border-blue-100 flex items-center justify-center mb-5 bg-blue-50/50"><i class="fas fa-question text-[35px] text-[#007BFF]"></i></div>
+            <h3 id="modal-confirm-title" class="text-[22px] font-bold text-[#1b2559] mb-2">Konfirmasi</h3>
+            <p id="modal-confirm-desc" class="text-gray-500 mb-8 text-[14px] leading-relaxed px-2">Apakah Anda yakin?</p>
+            <div class="flex gap-4 w-full">
+                <button onclick="closeModal()" class="flex-1 bg-gray-50 hover:bg-gray-100 border border-gray-200 text-gray-700 font-medium py-3 rounded-xl transition-colors text-[14px]">Batal</button>
+                <button id="btn-confirm-action" class="flex-1 bg-gradient-to-r from-[#7b68ee] to-[#6855df] hover:shadow-lg text-white font-medium py-3 rounded-xl transition-all text-[14px]">Ya, Lanjutkan</button>
+            </div>
+        </div>
+        
+        <!-- PREVIEW MODAL -->
+        <div id="modal-preview" class="bg-white rounded-[20px] shadow-2xl p-8 hidden flex-col transform transition-all scale-95 w-[600px] max-w-[90vw] max-h-[85vh] border border-gray-200 z-[9999999]">
+            <div class="flex justify-between items-center mb-4 border-b pb-4"><h3 class="text-xl font-bold text-[#0044EB]"><i class="fas fa-eye text-[#007BFF] mr-2"></i> Preview Isi Pesan</h3><button onclick="closeModal()" class="text-gray-400 hover:text-red-500 text-xl"><i class="fas fa-times"></i></button></div>
+            <div id="preview-content" class="overflow-y-auto custom-scroll p-6 bg-white border border-gray-200 rounded-xl text-[14px] text-black leading-relaxed max-h-[60vh] editor-box shadow-inner"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const IS_PREVIEW = false; // <--- UBAH JADI false SAAT DEPLOY
+    const GAS_URL = "https://script.google.com/macros/s/AKfycbwVSAmU2_-nQBb8xdhnukwMftXsZumGDP0wIQd3oi-C4zJ1lZ1Ovh4Qar2W6p5roUu1/exec"; 
+
+    // STATE DENGAN CACHE
+    let appState = { payrollData: [], templates: [], schedules: [], history: [], settings: { logo: '', banner: '', cc: '', bcc: '', favicon: '', senders: 'info@alleducation.com' }, queueSlip: [], isBroadcasting: false };
+
+    // =========================================================
+    // WYSIWYG EDITOR FUNGSI
+    // =========================================================
+    let activeTable = null;
+    document.addEventListener('click', function(e) {
+        if(e.target.closest('td') || e.target.closest('th')) {
+            if(activeTable) activeTable.classList.remove('table-selected');
+            activeTable = e.target.closest('table');
+            activeTable.classList.add('table-selected');
+        } else if(!e.target.closest('.editor-box') && !e.target.closest('button')) {
+            if(activeTable) { activeTable.classList.remove('table-selected'); activeTable = null; }
+        }
+    });
+
+    function formatDoc(cmd, elementId) {
+        const el = document.getElementById(elementId); el.focus();
+        document.execCommand(cmd, false, null);
+    }
+    
+    function insertLink(elementId) {
+        const url = prompt('Masukkan URL (Contoh: https://google.com):', 'https://');
+        if (url) { document.getElementById(elementId).focus(); document.execCommand('createLink', false, url); }
+    }
+
+    function insertTable(elementId) {
+        document.getElementById(elementId).focus();
+        const tableHTML = '<table border="1" style="width:100%; border-collapse: collapse; margin: 10px 0;"><tbody><tr><th style="padding:8px; border:1px solid #ccc; background:#f4f7fe;">Judul Kolom 1</th><th style="padding:8px; border:1px solid #ccc; background:#f4f7fe;">Judul Kolom 2</th></tr><tr><td style="padding:8px; border:1px solid #ccc;">Data 1</td><td style="padding:8px; border:1px solid #ccc;">Data 2</td></tr></tbody></table><br>';
+        document.execCommand('insertHTML', false, tableHTML);
+    }
+
+    function modifyTable(elementId, action, value = null) {
+        if(!activeTable) return alert("Klik salah satu tabel di dalam editor terlebih dahulu!");
+        document.getElementById(elementId).focus();
+        if(action === 'deleteTable') { activeTable.remove(); activeTable = null; }
+        else if(action === 'addRow') {
+            const tbody = activeTable.querySelector('tbody'); const colsCount = activeTable.rows[0].cells.length; const newRow = document.createElement('tr');
+            for(let i=0; i<colsCount; i++) { const cell = document.createElement('td'); cell.style.padding = '8px'; cell.style.border = '1px solid #ccc'; cell.innerHTML = 'Data Baru'; newRow.appendChild(cell); }
+            tbody.appendChild(newRow);
+        }
+        else if(action === 'addColumn') {
+            for(let i=0; i<activeTable.rows.length; i++) {
+                const isHeader = i === 0 && activeTable.rows[i].cells[0].tagName === 'TH';
+                const cell = document.createElement(isHeader ? 'th' : 'td');
+                cell.style.padding = '8px'; cell.style.border = '1px solid #ccc';
+                if(isHeader) { cell.style.background = '#f4f7fe'; cell.innerHTML = 'Judul Baru'; } else { cell.innerHTML = 'Data Baru'; }
+                activeTable.rows[i].appendChild(cell);
+            }
+        }
+        else if(action === 'setWidth') { activeTable.style.width = value; }
+        else if(action === 'setHeaderColor') { const headers = activeTable.querySelectorAll('th'); headers.forEach(th => th.style.background = value); }
+    }
+
+    function toggleSchedule() {
+        const isChecked = document.getElementById('cb-schedule').checked;
+        const container = document.getElementById('schedule-container');
+        const btn = document.getElementById('btn-broadcast');
+        if(isChecked) {
+            container.classList.remove('hidden');
+            btn.innerHTML = '<i class="far fa-calendar-check"></i> Simpan Jadwal';
+        } else {
+            container.classList.add('hidden');
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Reguler';
+        }
+    }
+
+    // =========================================================
+    // CORE APP LOGIC & UI (CACHE, NAVIGATION, MODALS)
+    // =========================================================
+    function setFavicon(url) { if (!url) return; let link = document.querySelector("link[rel~='icon']"); if (!link) { link = document.createElement('link'); link.rel = 'icon'; document.head.appendChild(link); } link.href = url; }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if(localStorage.getItem('hr_logged_in') === 'true') {
+            document.getElementById('user-display-name').innerText = localStorage.getItem('hr_username') || 'Admin';
+            document.getElementById('login-screen').classList.add('hidden', 'opacity-0', 'pointer-events-none');
+            document.getElementById('main-screen').classList.remove('hidden');
+            navTo('dashboard');
+        }
+        
+        // PASTIKAN FORMAT PARAGRAF (<p>) DIGUNAKAN SECARA NATIVE
+        document.execCommand('defaultParagraphSeparator', false, 'p');
+
+        // SOLUSI ENTER MENJADI PARAGRAF DI WYSIWYG
+        document.querySelectorAll('.editor-box').forEach(box => {
+            box.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    document.execCommand('insertParagraph', false, null);
+                }
+            });
+        });
+    });
+
+    function toggleModals(showId) {
+        const overlay = document.getElementById('modal-overlay');
+        const ids = ['modal-loading', 'modal-success', 'modal-error', 'modal-confirm', 'modal-preview'];
+        ids.forEach(id => { const el = document.getElementById(id); if (id === showId) { el.classList.remove('hidden', 'scale-95'); el.classList.add('scale-100'); el.style.display = 'flex'; } else { el.classList.add('hidden', 'scale-95'); el.classList.remove('scale-100'); el.style.display = 'none'; } });
+        overlay.classList.remove('hidden'); setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+    }
+    function showLoadingModal() { toggleModals('modal-loading'); }
+    function showSuccessModal(title, desc) { document.getElementById('modal-success-title').innerText = title; document.getElementById('modal-success-desc').innerText = desc; toggleModals('modal-success'); }
+    function showErrorModal(title, desc) { document.getElementById('modal-error-title').innerText = title; document.getElementById('modal-error-desc').innerText = desc; toggleModals('modal-error'); }
+    function showConfirmModal(title, desc, onConfirmCallback) {
+        document.getElementById('modal-confirm-title').innerText = title; document.getElementById('modal-confirm-desc').innerText = desc;
+        const btnConfirm = document.getElementById('btn-confirm-action'); const newBtn = btnConfirm.cloneNode(true); btnConfirm.parentNode.replaceChild(newBtn, btnConfirm);
+        newBtn.addEventListener('click', () => { closeModal(); onConfirmCallback(); }); toggleModals('modal-confirm');
+    }
+    function showPreview(htmlContent) {
+        document.getElementById('preview-content').innerHTML = htmlContent;
+        toggleModals('modal-preview');
+    }
+    function closeModal() {
+        const overlay = document.getElementById('modal-overlay'); overlay.classList.add('opacity-0');
+        setTimeout(() => { overlay.classList.add('hidden'); ['modal-loading', 'modal-success', 'modal-error', 'modal-confirm', 'modal-preview'].forEach(id => { document.getElementById(id).classList.add('scale-95'); document.getElementById(id).classList.remove('scale-100'); document.getElementById(id).style.display = 'none'; }); }, 300);
+    }
+    
+    function logTerminal(message, type = 'normal') {
+        const term = document.getElementById('terminal-content');
+        const color = type === 'success' ? 'text-[#4ade80]' : (type === 'error' ? 'text-red-400' : 'text-blue-300');
+        term.innerHTML += `<span class="${color}">> ${message}</span><br>`;
+        term.parentElement.scrollTop = term.parentElement.scrollHeight;
+    }
+
+    async function callBackend(action, dataObj = {}) {
+        if (IS_PREVIEW) return await mockBackendResponse(action, dataObj);
+        const formData = new URLSearchParams();
+        formData.append('action', action);
+        for (let key in dataObj) {
+            let val = typeof dataObj[key] === 'object' ? JSON.stringify(dataObj[key]) : dataObj[key];
+            // PERBAIKAN: Menghapus encodeURIComponent manual agar format Bold/Tabel dll tidak hancur saat dikirim
+            formData.append(key, val);
+        }
+        try {
+            const response = await fetch(GAS_URL, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: formData });
+            const result = await response.json();
+            if(!result.success) throw new Error(result.message);
+            return result.data;
+        } catch (error) { throw error; }
+    }
+
+    async function mockBackendResponse(action, data) {
+        return new Promise((resolve) => { setTimeout(() => { resolve(true); }, 500); });
+    }
+
+    function navTo(page) {
+        document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.nav-item').forEach(el => { el.classList.remove('bg-white', 'text-[#FB8C00]', 'shadow-md', 'font-bold', 'bg-blue-900/20'); el.classList.add('text-white', 'opacity-90', 'hover:bg-white/20', 'hover:opacity-100', 'font-medium'); });
+        const viewEl = document.getElementById(`view-${page}`); if(viewEl) viewEl.classList.remove('hidden');
+        const navEl = document.getElementById(`nav-${page}`);
+        if(navEl) { 
+            navEl.classList.remove('text-white', 'opacity-90', 'hover:bg-white/20', 'hover:opacity-100', 'font-medium'); 
+            if(page === 'payrollslip') navEl.classList.add('bg-blue-900/40', 'text-white', 'font-bold', 'shadow-md');
+            else navEl.classList.add('bg-white', 'text-[#FB8C00]', 'shadow-md', 'font-bold'); 
+        }
+        
+        const titles = { 'dashboard': 'Dashboard Statistik', 'input': 'Master Data Kontak', 'template': 'Manajemen Template Pesan', 'broadcast': 'Manajemen Broadcast Reguler', 'schedule': 'Jadwal & Rutinitas Email', 'settings': 'Pengaturan Sistem', 'history': 'Riwayat Email', 'payrollslip': 'Sistem Payroll Slip' };
+        const titleEl = document.getElementById('page-title'); if(titleEl && titles[page]) titleEl.innerText = titles[page];
+
+        if(page === 'dashboard') loadDashboard();
+        if(page === 'settings') loadSettings();
+        if(page === 'history') loadHistory();
+        if(page === 'template') loadTemplates();
+        if(page === 'schedule') loadSchedules();
+        if(page === 'broadcast') { loadPayrollData(); loadTemplatesForBroadcast(); loadSendersToDropdown(); }
+        if(page === 'payrollslip') { loadSendersToDropdownSlip(); }
+    }
+
+    document.getElementById('login-form').addEventListener('submit', async (e) => { e.preventDefault(); localStorage.setItem('hr_logged_in', 'true'); localStorage.setItem('hr_username', 'Admin'); document.getElementById('login-screen').classList.add('hidden'); document.getElementById('main-screen').classList.remove('hidden'); navTo('dashboard'); });
+    function doLogout() { localStorage.removeItem('hr_logged_in'); location.reload(); }
+
+    // ==========================================
+    // DATA LOADERS DENGAN CACHE 0 DETIK
+    // ==========================================
+    async function loadDashboard() { try { const s = await callBackend('getDashboardStats'); document.getElementById('stat-karyawan').innerText = s.total; document.getElementById('stat-sukses').innerText = s.sukses; document.getElementById('stat-gagal').innerText = s.gagal; } catch(e){} }
+    
+    async function loadSettings() { 
+        if(appState.settings.logo !== '') { applySet(appState.settings); return; } // Cache
+        try { const s = await callBackend('getSettings'); applySet(s); } catch(e){} 
+        function applySet(s) { document.getElementById('set-logo').value = s.logo||''; document.getElementById('set-banner').value = s.banner||''; document.getElementById('set-cc').value = s.cc||''; document.getElementById('set-bcc').value = s.bcc||''; document.getElementById('set-favicon').value = s.favicon||''; document.getElementById('set-senders').value = s.senders||'info@alleducation.com'; appState.settings = s; setFavicon(s.favicon); }
+    }
+
+    async function loadHistory(forceRefresh = false) { 
+        const tbody = document.getElementById('table-history-body');
+        if(!forceRefresh && appState.history.length > 0) return renderHist(appState.history); // Cache
+        tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-[#007BFF]"><i class="fas fa-spinner fa-spin mr-2"></i>Memuat riwayat...</td></tr>';
+        try { appState.history = await callBackend('getLogs'); renderHist(appState.history); } catch(e) { tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-red-500">Gagal memuat.</td></tr>'; }
+        function renderHist(data) { if(data.length === 0) return tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-gray-500 italic">Belum ada riwayat.</td></tr>'; tbody.innerHTML = data.map((log, i) => `<tr class="bg-white border-b hover:bg-blue-50/30 transition"><td class="px-6 py-4 text-gray-500">${log.time}</td><td class="px-6 py-4 font-bold text-[#0044EB]">${log.to}</td><td class="px-6 py-4 text-gray-600">${log.subject}</td><td class="px-6 py-4"><span class="px-3 py-1 text-[10px] font-bold rounded-full ${log.status === 'Sukses' ? 'bg-green-50 text-green-600 border border-green-200' : 'bg-red-50 text-red-600 border border-red-200'}">${log.status}</span></td><td class="px-6 py-4"><button onclick="previewHistoryLog(${i})" class="text-blue-500 hover:text-blue-700 bg-blue-50 px-3 py-1 rounded text-xs"><i class="fas fa-eye"></i> Pesan</button></td></tr>`).join(''); }
+    }
+    function previewHistoryLog(idx) { showPreview(appState.history[idx].body || '<i>(Tidak ada data isi pesan)</i>'); }
+
+    async function loadSchedules(forceRefresh = false) {
+        const tbody = document.getElementById('table-schedule-body');
+        if(!forceRefresh && appState.schedules.length > 0) return renderSched(appState.schedules);
+        tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-12 text-center text-[#007BFF]"><i class="fas fa-spinner fa-spin mr-2"></i>Memuat jadwal...</td></tr>';
+        try { appState.schedules = await callBackend('getSchedules'); renderSched(appState.schedules); } catch(e) { tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-12 text-center text-red-500">Gagal memuat.</td></tr>'; }
+        function renderSched(data) { if(data.length === 0) return tbody.innerHTML = '<tr><td colspan="6" class="px-6 py-12 text-center text-gray-500 italic">Belum ada jadwal tersimpan.</td></tr>'; tbody.innerHTML = data.map(t => `<tr class="bg-white border-b hover:bg-blue-50/30 transition"><td class="px-6 py-4 font-bold text-[#0044EB] whitespace-nowrap">${t.waktu}</td><td class="px-6 py-4 text-gray-600"><span class="bg-indigo-50 text-indigo-600 px-2 py-1 rounded text-xs font-bold border border-indigo-100">${t.rutinitas}</span></td><td class="px-6 py-4 text-gray-500 truncate max-w-[200px] font-medium">${t.subjek}</td><td class="px-6 py-4"><span class="px-3 py-1 text-[10px] font-bold rounded-full ${t.status === 'Selesai' ? 'bg-green-50 text-green-600 border border-green-200' : 'bg-yellow-50 text-yellow-600 border border-yellow-200'}">${t.status}</span></td><td class="px-6 py-4 text-[11px] text-gray-400 max-w-[200px] truncate" title="${t.log}">${t.log || '-'}</td><td class="px-6 py-4 text-center"><button onclick="deleteScheduleActionBtn('${t.id}')" class="text-red-400 hover:text-red-600 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition" title="Hapus Jadwal"><i class="fas fa-trash"></i></button></td></tr>`).join(''); }
+    }
+
+    async function deleteScheduleActionBtn(id) {
+        showConfirmModal('Hapus Jadwal', 'Apakah Anda yakin ingin menghapus jadwal ini secara permanen?', async () => {
+            showLoadingModal();
+            try { await callBackend('deleteScheduleAction', { id: id }); appState.schedules = []; loadSchedules(true); showSuccessModal('Dihapus!', 'Jadwal berhasil dihapus.'); } 
+            catch(e) { showErrorModal('Gagal!', 'Terjadi kesalahan saat menghapus jadwal.'); }
+        });
+    }
+
+    async function forceRunAllSchedules() {
+        showConfirmModal('Eksekusi Manual', 'Sistem akan memeriksa dan mengeksekusi langsung jadwal tertunda tanpa menunggu robot. Lanjutkan?', async () => {
+            showLoadingModal();
+            try { await callBackend('forceRunSchedules'); appState.schedules = []; loadSchedules(true); showSuccessModal('Berhasil!', 'Jadwal tertunda telah dieksekusi secara manual.'); } 
+            catch(e) { showErrorModal('Gagal!', 'Gagal mengeksekusi jadwal.'); }
+        });
+    }
+
+    async function loadTemplates(forceRefresh = false) {
+        const tbody = document.getElementById('table-template-body');
+        if(!forceRefresh && appState.templates.length > 0) return renderTmpl(appState.templates);
+        tbody.innerHTML = '<tr><td colspan="3" class="px-6 py-8 text-center text-[#007BFF]"><i class="fas fa-spinner fa-spin mr-2"></i>Memuat...</td></tr>';
+        try { appState.templates = await callBackend('getTemplates'); renderTmpl(appState.templates); } catch(e) { tbody.innerHTML = '<tr><td colspan="3" class="px-6 py-8 text-center text-red-500">Gagal memuat.</td></tr>'; }
+        function renderTmpl(data) { if(data.length === 0) return tbody.innerHTML = '<tr><td colspan="3" class="px-6 py-8 text-center text-gray-500 italic">Belum ada template.</td></tr>'; tbody.innerHTML = data.map(t => `<tr class="bg-white border-b hover:bg-blue-50/30 transition"><td class="px-6 py-4 font-bold text-[#0044EB]">${t.name}</td><td class="px-6 py-4 text-gray-500 truncate max-w-[200px]">${t.subject}</td><td class="px-6 py-4 text-right space-x-2"><button onclick="editTemplate('${t.id}')" class="text-[#007BFF] hover:text-[#0044EB] bg-blue-50 px-2.5 py-1.5 rounded-lg"><i class="fas fa-edit"></i></button><button onclick="deleteTemplate('${t.id}')" class="text-red-500 hover:text-red-700 bg-red-50 px-2.5 py-1.5 rounded-lg"><i class="fas fa-trash"></i></button></td></tr>`).join(''); }
+    }
+
+    // TEMPLATE ACTIONS
+    function resetTemplateForm() { document.getElementById('form-template').reset(); document.getElementById('tmpl-id').value = ''; document.getElementById('tmpl-body').innerHTML = ''; document.getElementById('form-template-title').innerText = 'Buat Template Baru'; }
+    function editTemplate(id) { const tmpl = appState.templates.find(t => t.id === id); if(!tmpl) return; document.getElementById('tmpl-id').value = tmpl.id; document.getElementById('tmpl-name').value = tmpl.name; document.getElementById('tmpl-subject').value = tmpl.subject; document.getElementById('tmpl-body').innerHTML = tmpl.body; document.getElementById('form-template-title').innerText = 'Edit Template Tersimpan'; }
+    async function deleteTemplate(id) { showConfirmModal('Hapus Template', 'Apakah Anda yakin ingin menghapus template pesan ini secara permanen?', async () => { showLoadingModal(); try { await callBackend('deleteTemplate', { id: id }); appState.templates = []; loadTemplates(true); showSuccessModal('Dihapus!', 'Template berhasil dihapus.'); } catch(e) { showErrorModal('Gagal!', 'Terjadi kesalahan saat menghapus template.'); } }); }
+
+    document.getElementById('form-template').addEventListener('submit', async (e) => {
+        e.preventDefault(); showLoadingModal();
+        const payload = { id: document.getElementById('tmpl-id').value, name: document.getElementById('tmpl-name').value, subject: document.getElementById('tmpl-subject').value, body: document.getElementById('tmpl-body').innerHTML };
+        try { await callBackend('saveTemplate', payload); resetTemplateForm(); appState.templates = []; loadTemplates(true); showSuccessModal('Tersimpan!', 'Template pesan berhasil disimpan ke database.'); } catch(e) { showErrorModal('Gagal!', 'Terjadi kesalahan saat menyimpan template.'); }
+    });
+
+    // INPUT MASTER DATA
+    document.getElementById('form-input-manual').addEventListener('submit', async (e) => {
+        e.preventDefault(); showLoadingModal();
+        const payload = { contacts: [{ nama: document.getElementById('input-nama').value, email: document.getElementById('input-email').value }] };
+        try { await callBackend('addBulkKontak', payload); document.getElementById('form-input-manual').reset(); appState.payrollData = []; showSuccessModal('Tersimpan!', 'Kontak baru telah ditambahkan ke Master Data.'); } catch (err) { showErrorModal('Gagal Menyimpan!', err.message); }
+    });
+
+    document.getElementById('form-input-massal').addEventListener('submit', async (e) => {
+        e.preventDefault(); const rawData = document.getElementById('input-excel').value; const rows = rawData.split('\n'); const parsedContacts = [];
+        rows.forEach(row => { const cols = row.split('\t'); if (cols.length >= 2 && cols[0].trim() !== '' && cols[1].includes('@')) { parsedContacts.push({ nama: cols[0].trim(), email: cols[1].trim() }); } });
+        if(parsedContacts.length === 0) return showErrorModal('Data Tidak Valid!', 'Pastikan format dari Excel benar (Kolom 1: Nama, Kolom 2: Email) dan di-copy bersamaan.');
+        showLoadingModal();
+        try { await callBackend('addBulkKontak', { contacts: parsedContacts }); document.getElementById('form-input-massal').reset(); appState.payrollData = []; showSuccessModal('Import Selesai!', `${parsedContacts.length} Kontak berhasil diimport ke Master Data!`); } catch (err) { showErrorModal('Gagal Import!', err.message); }
+    });
+
+    // SETTINGS SAVE
+    async function saveSettings() {
+        showLoadingModal();
+        try { const payload = { logo: document.getElementById('set-logo').value, banner: document.getElementById('set-banner').value, cc: document.getElementById('set-cc').value, bcc: document.getElementById('set-bcc').value, favicon: document.getElementById('set-favicon').value, senders: document.getElementById('set-senders').value }; await callBackend('saveSettings', payload); setFavicon(payload.favicon); appState.settings = payload; showSuccessModal('Tersimpan!', 'Seluruh pengaturan tampilan dan email berhasil disimpan permanen ke database.'); } catch (e) { showErrorModal('Gagal Menyimpan!', 'Terjadi kesalahan sistem.'); } 
+    }
+
+    // BROADCAST LIST LOADERS
+    async function loadPayrollData(forceRefresh = false) {
+        const tbody = document.getElementById('table-payroll-body'); const icon = document.getElementById('icon-sync'); if(icon) icon.classList.add('fa-spin');
+        if(!forceRefresh && appState.payrollData.length > 0) { if(icon) icon.classList.remove('fa-spin'); return renderPR(appState.payrollData); }
+        tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-[#007BFF]"><i class="fas fa-spinner fa-spin mr-2"></i>Menarik Master Data...</td></tr>';
+        try { appState.payrollData = await callBackend('getPayrollData'); renderPR(appState.payrollData); } catch (e) { tbody.innerHTML = `<tr><td colspan="5" class="px-6 py-12 text-center text-red-500">Gagal menarik data.</td></tr>`; } finally { if(icon) icon.classList.remove('fa-spin'); }
+        function renderPR(data) { if(data.length === 0) return tbody.innerHTML = '<tr><td colspan="5" class="px-6 py-12 text-center text-green-500 font-medium">Master Data Kosong! Silakan tambah di menu Master Kontak.</td></tr>'; tbody.innerHTML = data.map((row, index) => `<tr class="contact-row bg-white border-b hover:bg-blue-50/30 transition" id="row-${index}" data-name="${row.nama}"><td class="px-6 py-4 align-top"><input type="checkbox" id="cb-${index}" class="cb-penerima w-4 h-4 text-[#007BFF] rounded border-gray-300 focus:ring-blue-500 mt-1" data-index="${index}"></td><td class="px-6 py-4 align-top cursor-pointer" onclick="document.getElementById('cb-${index}').click()"><div class="font-bold text-blue-700">${row.nama}</div><div class="text-[11px] text-gray-500 bg-gray-100 inline-block px-2 py-0.5 rounded mt-1">${row.email}</div></td><td class="px-6 py-4 align-top"><div id="lampiran-container-${index}" class="space-y-1.5 w-full"><div class="flex items-center gap-1"><input type="url" class="attachment-link-${index} w-full px-3 py-2 text-xs border border-gray-200 rounded-lg outline-none focus:border-[#007BFF] bg-gray-50 focus:bg-white transition" placeholder="Paste link Google Drive..."></div></div><button onclick="addLinkInput(${index})" class="mt-2 text-[10px] text-[#007BFF] hover:underline font-bold bg-blue-50 px-2 py-1 rounded"><i class="fas fa-plus mr-1"></i> Tambah Lampiran Lain</button></td><td class="px-6 py-4 align-top text-center" id="status-${index}"><span class="px-3 py-1 text-[10px] rounded-full bg-gray-100 uppercase text-gray-500 font-bold border border-gray-200 mt-1 inline-block">Standby</span></td><td class="px-4 py-4 align-top text-center"><button onclick="deleteSingleKontak('${row.id}')" class="text-red-400 hover:text-red-600 bg-red-50 hover:bg-red-100 p-2 rounded-lg transition mt-0.5"><i class="fas fa-trash"></i></button></td></tr>`).join(''); }
+    }
+
+    function addLinkInput(index) {
+        const container = document.getElementById(`lampiran-container-${index}`);
+        const div = document.createElement('div'); div.className = 'flex items-center gap-1 mt-1.5';
+        div.innerHTML = `<input type="url" class="attachment-link-${index} w-full px-3 py-2 text-xs border border-gray-200 rounded-lg outline-none focus:border-[#007BFF] bg-gray-50 focus:bg-white transition" placeholder="Paste link Google Drive..."><button onclick="this.parentElement.remove()" class="text-red-400 hover:text-red-600 p-1.5 rounded bg-red-50 hover:bg-red-100 transition"><i class="fas fa-times"></i></button>`;
+        container.appendChild(div);
+    }
+    
+    function filterKontak() { const input = document.getElementById('search-kontak').value.toLowerCase(); document.querySelectorAll('#table-payroll-body tr.contact-row').forEach(row => { row.style.display = row.getAttribute('data-name').toLowerCase().includes(input) ? '' : 'none'; }); }
+    function toggleAll() { const checked = document.getElementById('check-all').checked; document.querySelectorAll('.cb-penerima').forEach(cb => cb.checked = checked); }
+
+    async function deleteSelectedKontak() {
+        const checkboxes = document.querySelectorAll('.cb-penerima:checked');
+        if(checkboxes.length === 0) return showErrorModal('Penerima Kosong!', 'Pilih minimal satu penerima dari tabel untuk dihapus.');
+        showConfirmModal('Hapus Kontak Terpilih', `Anda yakin ingin menghapus ${checkboxes.length} penerima secara permanen dari Master Data?`, async () => {
+            const idsToDelete = Array.from(checkboxes).map(cb => appState.payrollData[parseInt(cb.dataset.index)].id.toString());
+            
+            // CACHE 0 DETIK: Hapus langsung di tampilan layar tanpa loading muter-muter
+            appState.payrollData = appState.payrollData.filter(row => !idsToDelete.includes(row.id.toString()));
+            loadPayrollData(false); 
+            showSuccessModal('Dihapus!', 'Data penerima terpilih berhasil dihapus.'); 
+            
+            // Proses ke server Google Sheet berjalan diam-diam di latar belakang
+            try { await callBackend('deleteKontak', { ids: idsToDelete }); } catch(e) {}
+        });
+    }
+
+    async function deleteSingleKontak(id) {
+        showConfirmModal('Hapus Kontak', `Anda yakin ingin menghapus kontak ini dari Master Data?`, async () => {
+            // CACHE 0 DETIK: Hapus langsung di tampilan layar tanpa loading muter-muter
+            appState.payrollData = appState.payrollData.filter(row => row.id.toString() !== id.toString());
+            loadPayrollData(false);
+            showSuccessModal('Dihapus!', 'Data penerima berhasil dihapus.'); 
+            
+            // Proses ke server Google Sheet berjalan diam-diam di latar belakang
+            try { await callBackend('deleteKontak', { ids: [id] }); } catch(e) {}
+        });
+    }
+
+    async function loadTemplatesForBroadcast() { try { if(appState.templates.length===0) appState.templates = await callBackend('getTemplates'); const select = document.getElementById('select-broadcast-template'); select.innerHTML = '<option value="">-- Ketik Manual --</option>'; appState.templates.forEach(t => { select.innerHTML += `<option value="${t.id}">${t.name}</option>`; }); } catch(e) {} }
+    function applySelectedTemplate() { const id = document.getElementById('select-broadcast-template').value; if(!id) { document.getElementById('email-subject').value = ''; document.getElementById('email-body').innerHTML = ''; return; } const tmpl = appState.templates.find(t => t.id === id); if(tmpl) { document.getElementById('email-subject').value = tmpl.subject; document.getElementById('email-body').innerHTML = tmpl.body; } }
+
+    async function loadSendersToDropdown() {
+        if (!appState.settings.senders) appState.settings = await callBackend('getSettings');
+        const select = document.getElementById('select-sender'); select.innerHTML = '';
+        let sendersStr = appState.settings.senders || 'info@alleducation.com'; let sendersArr = sendersStr.split(',').map(s => s.trim()).filter(s => s !== ''); if(sendersArr.length === 0) sendersArr = ['info@alleducation.com'];
+        sendersArr.forEach(sender => { select.innerHTML += `<option value="${sender}">${sender}</option>`; });
+    }
+    
+    async function loadSendersToDropdownSlip() {
+        if (!appState.settings.senders) appState.settings = await callBackend('getSettings');
+        const select = document.getElementById('slip-sender'); select.innerHTML = '';
+        let sendersStr = appState.settings.senders || 'info@alleducation.com'; let sendersArr = sendersStr.split(',').map(s => s.trim()).filter(s => s !== ''); if(sendersArr.length === 0) sendersArr = ['info@alleducation.com'];
+        sendersArr.forEach(sender => { select.innerHTML += `<option value="${sender}">${sender}</option>`; });
+    }
+
+    // ==========================================
+    // SISTEM PENGIRIMAN PARALEL CEPAT & JADWAL
+    // ==========================================
+    async function startBroadcast() {
+        if(IS_PREVIEW) return showErrorModal('Mode Preview!', 'Silakan ubah variabel const IS_PREVIEW = false; pada kode HTML Anda.');
+        const checkboxes = document.querySelectorAll('.cb-penerima:checked');
+        if(checkboxes.length === 0) return showErrorModal('Penerima Kosong!', 'Silakan centang minimal satu penerima dari tabel.');
+
+        const isScheduled = document.getElementById('cb-schedule') ? document.getElementById('cb-schedule').checked : false;
+        const senderName = document.getElementById('select-sender').value || "info@alleducation.com";
+        const subjectBase = document.getElementById('email-subject').value;
+        const periode = document.getElementById('email-periode').value;
+        const bodyTemplate = document.getElementById('email-body').innerHTML; 
+
+        const selectedIndices = Array.from(checkboxes).map(cb => parseInt(cb.dataset.index));
+
+        if(isScheduled) {
+            const schedTime = document.getElementById('schedule-time').value;
+            const schedRoutine = document.getElementById('schedule-routine').value;
+            if(!schedTime) return showErrorModal('Waktu Kosong!', 'Silakan isi Tanggal & Waktu Mulai untuk pengiriman terjadwal.');
+            
+            showLoadingModal();
+            let recipientsData = [];
+            selectedIndices.forEach(dataIndex => {
+                let row = appState.payrollData[dataIndex];
+                let links = []; document.querySelectorAll(`.attachment-link-${dataIndex}`).forEach(inp => { if(inp.value.trim() !== '') links.push(inp.value.trim()); });
+                recipientsData.push({ email: row.email, nama: row.nama, attachment_links: links.join(',') });
+            });
+
+            try {
+                // Konversi waktu agar aman dikirim ke GAS
+                let isoTime = new Date(schedTime).toISOString(); 
+                await callBackend('scheduleBroadcast', { schedule_time: isoTime, schedule_routine: schedRoutine, sender_name: senderName, subject: subjectBase, periode: periode, body: bodyTemplate, batchData: JSON.stringify(recipientsData) });
+                appState.schedules = []; // Hapus cache agar pas buka menu jadwal dia load ulang
+                showSuccessModal('Berhasil Dijadwalkan!', `Email akan otomatis diproses sistem sesuai jadwal rutinitas yang ditentukan.`);
+            } catch(e) { showErrorModal('Gagal', e.message); }
+            return;
+        }
+
+        const btn = document.getElementById('btn-broadcast');
+        btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Memproses...';
+        appState.isBroadcasting = true;
+        document.getElementById('terminal-content').innerHTML = ''; logTerminal(`Memulai proses pengiriman massal atas nama ${senderName}...`, 'normal');
+        let successCount = 0; let failCount = 0;
+
+        const sendTask = async (dataIndex) => {
+            let row = appState.payrollData[dataIndex];
+            let statusCell = document.getElementById(`status-${dataIndex}`);
+            statusCell.innerHTML = '<span class="px-3 py-1 text-[10px] rounded-full bg-blue-50 text-[#007BFF] uppercase border border-blue-200 font-bold"><i class="fas fa-spinner fa-spin"></i> Proses</span>';
+            
+            let links = []; document.querySelectorAll(`.attachment-link-${dataIndex}`).forEach(inp => { if(inp.value.trim() !== '') links.push(inp.value.trim()); });
+
+            try {
+                await callBackend('sendSingleEmail', { id: row.id, email: row.email, nama: row.nama, attachment_links: links.join(','), subject: subjectBase, periode: periode, body: bodyTemplate, sender_name: senderName });
+                statusCell.innerHTML = '<span class="px-3 py-1 text-[10px] rounded-full bg-green-50 text-green-600 uppercase font-bold border border-green-200">Terkirim</span>';
+                successCount++; logTerminal(`[OK] Berhasil dikirim ke email secara paralel.`, 'success');
+            } catch (err) {
+                statusCell.innerHTML = `<span class="px-3 py-1 text-[10px] rounded-full bg-red-50 text-red-600 uppercase font-bold border border-red-200">Gagal</span>`;
+                failCount++; logTerminal(`[GAGAL] ${row.email}: ${err.message}`, 'error');
+            }
+        };
+
+        const maxConcurrent = 3;
+        for (let i = 0; i < selectedIndices.length; i += maxConcurrent) {
+            if(!appState.isBroadcasting) break;
+            const chunk = selectedIndices.slice(i, i + maxConcurrent);
+            await Promise.all(chunk.map(index => sendTask(index))); 
+        }
+
+        appState.isBroadcasting = false;
+        appState.history = []; // Clear cache histori
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Sekarang';
+        btn.disabled = false;
+        logTerminal(`Proses Selesai!`, 'normal');
+        showSuccessModal('Terkirim!', 'Email notifikasi massal berhasil diproses.');
+    }
+
+    // ==========================================
+    // LOGIC: FITUR PAYROLL SLIP
+    // ==========================================
+    function copyFormatHeader() {
+        const text = "Email\tNama\tJabatan\tGrade\tHari Kerja\tAbsen\tGaji Pokok\tTunj. Jabatan\tTunj. Keahlian\tTunj. Interim\tTunj. Kinerja\tTunj. Gross Up\tBPJS Kes (T)\tBPJS JHT (T)\tBPJS JP (T)\tBonus\tTHR\tUang Kompensasi\tUang Pisah\tUang Pesangon\tUang Penghargaan\tUang Penggantian\tInsentif\tBPJS Kes (NT)\tBPJS JHT (NT)\tBPJS JP (NT)\tBPJS JKK (NT)\tBPJS JKM (NT)\tBPJS JKP (NT)\tIuran BPJS Kes\tIuran BPJS JHT\tIuran BPJS JP\tProrata Absen\tPinjaman\tPajak Insentif";
+        const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+        alert("Format Header telah di-copy! Paste di A1 Excel Anda.");
+    }
+
+    document.getElementById('form-import-payrollslip').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const rawData = document.getElementById('input-excel-payrollslip').value;
+        const periode = document.getElementById('payroll-periode-import').value;
+        const rows = rawData.split('\n');
+        
+        if(rows.length < 2) return showErrorModal('Data Kurang!', 'Pastikan Anda meng-copy Header-nya dan minimal 1 baris data karyawan!');
+        
+        let parsedData = [];
+        for(let i=1; i<rows.length; i++) {
+            if(rows[i].trim() === '') continue;
+            let cols = rows[i].split('\t');
+            if(cols.length < 35) continue; 
+            
+            parsedData.push({
+                email: cols[0].trim(), nama: cols[1].trim(), jabatan: cols[2].trim(), grade: cols[3].trim(), hari_kerja: cols[4].trim(), absen: cols[5].trim(),
+                gaji_pokok: cols[6].trim(), tunj_jabatan: cols[7].trim(), tunj_keahlian: cols[8].trim(), tunj_interim: cols[9].trim(), tunj_kinerja: cols[10].trim(), tunj_grossup: cols[11].trim(),
+                bpjs_kes_t: cols[12].trim(), bpjs_jht_t: cols[13].trim(), bpjs_jp_t: cols[14].trim(),
+                bonus: cols[15].trim(), thr: cols[16].trim(), uang_komp: cols[17].trim(), uang_pisah: cols[18].trim(), uang_pesangon: cols[19].trim(), uang_penghargaan: cols[20].trim(), uang_penggantian: cols[21].trim(), insentif: cols[22].trim(),
+                bpjs_kes_nt: cols[23].trim(), bpjs_jht_nt: cols[24].trim(), bpjs_jp_nt: cols[25].trim(), bpjs_jkk_nt: cols[26].trim(), bpjs_jkm_nt: cols[27].trim(), bpjs_jkp_nt: cols[28].trim(),
+                pot_kes: cols[29].trim(), pot_jht: cols[30].trim(), pot_jp: cols[31].trim(), pot_absen: cols[32].trim(), pot_pinjaman: cols[33].trim(), pot_pajak: cols[34].trim(),
+                periode: periode
+            });
+        }
+        
+        if(parsedData.length === 0) return showErrorModal('Data Rusak', 'Tidak ada data valid yang bisa dibaca. Pastikan Anda mengcopy dari Excel menggunakan TAB delimit, dan ada 35 Kolom.');
+        
+        showLoadingModal();
+        try {
+            await callBackend('importSlipData', { slips: parsedData });
+            document.getElementById('form-import-payrollslip').reset();
+            showSuccessModal('Import Selesai!', `${parsedData.length} Data Slip Gaji berhasil masuk ke Antrean Server! Klik tombol Cek Antrean di bawah.`);
+            loadAntreanPayrollSlip();
+        } catch(e) { showErrorModal('Error', e.message); }
+    });
+
+    async function loadAntreanPayrollSlip() {
+        const btn = document.getElementById('btn-send-payrollslip');
+        document.getElementById('terminal-slip-content').innerHTML = '> Memeriksa antrean di server database...<br>';
+        try {
+            appState.queueSlip = await callBackend('getSlipQueue');
+            if(appState.queueSlip.length > 0) {
+                logTerminalSlip(`[INFO] Ditemukan ${appState.queueSlip.length} data slip gaji ngantre siap kirim!`, 'success');
+                btn.disabled = false;
+            } else {
+                logTerminalSlip(`[INFO] Antrean kosong. Silakan import data Excel di atas.`, 'normal');
+                btn.disabled = true;
+            }
+        } catch(e) { logTerminalSlip(`[ERROR] Gagal mengecek antrean: ${e.message}`, 'error'); }
+    }
+    
+    function logTerminalSlip(message, type = 'normal') {
+        const term = document.getElementById('terminal-slip-content');
+        const color = type === 'success' ? 'text-[#4ade80]' : (type === 'error' ? 'text-red-400' : 'text-blue-300');
+        term.innerHTML += `<span class="${color}">${message}</span><br>`;
+        term.parentElement.scrollTop = term.parentElement.scrollHeight;
+    }
+
+    async function startBroadcastPayrollSlip() {
+        if(IS_PREVIEW) return showErrorModal('Mode Preview', 'Matikan IS_PREVIEW untuk mengirim beneran.');
+        if(appState.queueSlip.length === 0) return;
+        
+        const btn = document.getElementById('btn-send-payrollslip');
+        btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-1"></i> MENGIRIM...';
+        
+        const subject = document.getElementById('slip-subject').value;
+        const sender = document.getElementById('slip-sender').value;
+        
+        document.getElementById('terminal-slip-content').innerHTML = '';
+        logTerminalSlip(`[SYSTEM] Memulai Pembangkitan HTML Dinamis & Pengiriman Paralel...`);
+        
+        let successCount = 0; let failCount = 0;
+        
+        const sendTaskSlip = async (rowObj) => {
+            try {
+                await callBackend('sendSingleSlipHTML', { data: rowObj, subject: subject, sender_name: sender });
+                successCount++;
+                logTerminalSlip(`[OK] Slip HTML berhasil dikirim ke: ${rowObj.email}`, 'success');
+            } catch(e) {
+                failCount++;
+                logTerminalSlip(`[GAGAL] ${rowObj.email}: ${e.message}`, 'error');
+            }
+        };
+
+        const maxConcurrent = 3;
+        for (let i = 0; i < appState.queueSlip.length; i += maxConcurrent) {
+            const chunk = appState.queueSlip.slice(i, i + maxConcurrent);
+            await Promise.all(chunk.map(rowObj => sendTaskSlip(rowObj))); 
+        }
+
+        try { await callBackend('clearSlipQueue'); } catch(e){}
+        appState.queueSlip = []; appState.history = [];
+
+        btn.innerHTML = '<i class="fas fa-bolt mr-1"></i> EKSEKUSI KIRIM SLIP!';
+        btn.disabled = true; 
+        logTerminalSlip(`\n[SELESAI] Total Sukses: ${successCount} | Total Gagal: ${failCount}`, 'normal');
+        showSuccessModal('Pengiriman Slip Selesai!', `${successCount} Slip Gaji HTML telah dikirim.`);
+    }
+</script>
